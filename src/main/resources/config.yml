@@ -1,24 +1,24 @@
 # All these values refer to the fake time, not real time
 days-in-week: 10
-month-in-year: 10
-days-in-month: {
-  1: 100
-  2: 100
-  3: 100
-  4: 100
-  5: 100
-  6: 100
-  7: 100
-  8: 100
-  9: 100
-  10: 100
-}
+months-in-year: 10
+days-in-month:
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+
 seconds-in-minute: 60
-minute-in-hour: 60
+minutes-in-hour: 60
 # Note Am/PM will be based off this value / 2
 # Also 12 and 24 hour formats will become / 2 of this
 # This value must be dividable by 2 if using AM/PM or 12 hour time
-hour-in-day: 24
+hours-in-day: 24
 
 # Settings to do with the lunar cycle
 # number of fake seconds for a complete lunar cycle
@@ -28,11 +28,11 @@ lunar-cycle: 3153600
 # Timezone used to calculate the time
 timezone: 'UTC'
 
-# The number of real seconds in a year
-year-length: 31556900
+# The length of a fake year in real years
+year-length: 1
 
 # An Amount to add to the year, negative values allowed
-year-modifier: 1655
+year-modifier: -1749
 
 # How often should we update position of sun and moon in seconds
 update-interval: 600
@@ -42,31 +42,29 @@ update-interval: 600
 # Time is in seconds
 clock-cache: 60
 
-month-names: {
-  1:  "Ascension"
-  2:  "Wind's Renewal"
-  3:  "Forgefire"
-  4:  "Sun's Might"
-  5:  "Sand's Song"
-  6:  "Tide's Flux"
-  7:  "Stormshift"
-  8:  "Urth's Heart"
-  9:  "Frostshroud"
-  10: "Reckoning"
-}
+month-names:
+  - "Ascension"
+  - "Wind's Renewal"
+  - "Forgefire"
+  - "Sun's Might"
+  - "Sand's Song"
+  - "Tide's Flux"
+  - "Stormshift"
+  - "Urth's Heart"
+  - "Frostshroud"
+  - "Reckoning"
 
-weekday-names: {
-  1:  "Ulvei"
-  2:  "Antwei"
-  3:  "Toldei"
-  4:  "Mirnei"
-  5:  "Kultei"
-  6:  "Yavhei"
-  7:  "Fenyei"
-  8:  "Rosnei"
-  9:  "Ulmhei"
-  10: "Paartesh"
-}
+weekday-names:
+  - "Paartesh"
+  - "Ulvei"
+  - "Antwei"
+  - "Toldei"
+  - "Mirnei"
+  - "Kultei"
+  - "Yavhei"
+  - "Fenyei"
+  - "Rosnei"
+  - "Ulmhei"
 
 # Whether right clicking a watch should display the time
 use-watch: true
