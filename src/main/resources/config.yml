@@ -20,11 +20,6 @@ minutes-in-hour: 60
 # This value must be dividable by 2 if using AM/PM or 12 hour time
 hours-in-day: 24
 
-# Settings to do with the lunar cycle
-# number of fake seconds for a complete lunar cycle
-# usually this is the time of a month
-lunar-cycle: 3153600
-
 # Timezone used to calculate the time
 timezone: 'UTC'
 
@@ -35,7 +30,7 @@ year-length: 1
 year-modifier: -1749
 
 # How often should we update position of sun and moon in seconds
-update-interval: 600
+update-interval: 300
 
 # prevent re-calculating the clock and cache it for this amount of time
 # This stops lag by people spamming the watch

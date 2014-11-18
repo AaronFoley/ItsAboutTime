@@ -26,6 +26,12 @@ public class TimeCalculator
 
     private String formatStr;
 
+    private int updateTime;
+
+    private Time cached = null;
+    private Long cachedTime = 0L;
+    private long cacheHoldTime;
+
     public TimeCalculator(ItsAboutTime plugin)
     {
         this.plugin = plugin;
@@ -53,6 +59,10 @@ public class TimeCalculator
         timezone = plugin.getConfig().getString("timezone");
         formatStr = plugin.getConfig().getString("time-format");
 
+        cacheHoldTime = plugin.getConfig().getLong("clock-cache");
+
+        updateTime = plugin.getConfig().getInt("update-interval");
+
         // Check days in month length, should be equal to months in year
         if (daysInMonth.size() != monthInYear)
         {
@@ -79,6 +89,9 @@ public class TimeCalculator
 
     public Time calculateTime()
     {
+        if ((this.cachedTime + this.cacheHoldTime) > System.currentTimeMillis()/1000 && this.cached != null)
+            return this.cached;
+
         // Get the current time
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
@@ -149,16 +162,10 @@ public class TimeCalculator
         int seconds = (int) Math.floor(fragment * secondsInMinute);
 
         // Now make a time object
-        Time time = new Time();
+        Time time = new Time(year, month + 1, dayInYear + 1 - totalDays, dayInYear + 1, (dayInYear + 1) % daysInWeek, hours, minutes, seconds);
 
-        time.year = year;
-        time.month = month + 1;
-        time.dayOfMonth = dayInYear + 1 - totalDays;
-        time.dayOfYear = dayInYear + 1;
-        time.weekDay = (dayInYear + 1) % daysInWeek;
-        time.hour = hours;
-        time.minute = minutes;
-        time.second = seconds;
+        this.cached = time;
+        this.cachedTime = System.currentTimeMillis()/1000;
 
         return time;
     }
@@ -167,34 +174,34 @@ public class TimeCalculator
     {
         String ret = this.formatStr;
 
-        ret = ret.replaceAll("%d", leadingZeros(time.dayOfMonth));
-        ret = ret.replaceAll("%D", String.valueOf(time.dayOfMonth));
-        ret = ret.replaceAll("%l", weekdayNames.get(time.weekDay));
-        ret = ret.replaceAll("%o", this.getOrdinal(time.dayOfMonth));
+        ret = ret.replaceAll("%d", leadingZeros(time.getDayOfMonth()));
+        ret = ret.replaceAll("%D", String.valueOf(time.getDayOfMonth()));
+        ret = ret.replaceAll("%l", weekdayNames.get(time.getWeekDay()));
+        ret = ret.replaceAll("%o", this.getOrdinal(time.getDayOfMonth()));
 
-        ret = ret.replaceAll("%F", monthNames.get(time.month -1));
-        ret = ret.replaceAll("%m", leadingZeros(time.month));
-        ret = ret.replaceAll("%M", String.valueOf(time.month));
+        ret = ret.replaceAll("%F", monthNames.get(time.getMonth() -1));
+        ret = ret.replaceAll("%m", leadingZeros(time.getMonth()));
+        ret = ret.replaceAll("%M", String.valueOf(time.getMonth()));
 
-        ret = ret.replaceAll("%y", String.valueOf(time.year));
-        ret = ret.replaceAll("%Y", String.valueOf(time.year).substring(String.valueOf(time.year).length() - 2));
+        ret = ret.replaceAll("%y", String.valueOf(time.getYear()));
+        ret = ret.replaceAll("%Y", String.valueOf(time.getYear()).substring(String.valueOf(time.getYear()).length() - 2));
 
         String ampm;
-        if (time.hour > (hourInDay / 2))
+        if (time.getHour() > (hourInDay / 2))
             ampm = "pm";
         else
             ampm = "am";
 
         ret = ret.replaceAll("%a", ampm);
         ret = ret.replaceAll("%A", ampm.toUpperCase());
-        ret = ret.replaceAll("%g", String.valueOf(time.hour - (hourInDay / 2)));
-        ret = ret.replaceAll("%G", String.valueOf(time.hour));
-        ret = ret.replaceAll("%h", leadingZeros(time.hour - (hourInDay / 2)));
-        ret = ret.replaceAll("%H", leadingZeros(time.hour));
-        ret = ret.replaceAll("%i", leadingZeros(time.minute));
-        ret = ret.replaceAll("%I", String.valueOf(time.minute));
-        ret = ret.replaceAll("%s", leadingZeros(time.second));
-        ret = ret.replaceAll("%S", String.valueOf(time.second));
+        ret = ret.replaceAll("%g", String.valueOf(time.getHour() - (hourInDay / 2)));
+        ret = ret.replaceAll("%G", String.valueOf(time.getHour()));
+        ret = ret.replaceAll("%h", leadingZeros(time.getHour() - (hourInDay / 2)));
+        ret = ret.replaceAll("%H", leadingZeros(time.getHour()));
+        ret = ret.replaceAll("%i", leadingZeros(time.getMinute()));
+        ret = ret.replaceAll("%I", String.valueOf(time.getMinute()));
+        ret = ret.replaceAll("%s", leadingZeros(time.getSecond()));
+        ret = ret.replaceAll("%S", String.valueOf(time.getSecond()));
 
         ret = ret.replaceAll("%%", "%");
 

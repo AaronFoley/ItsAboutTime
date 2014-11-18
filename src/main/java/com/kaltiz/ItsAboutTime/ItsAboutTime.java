@@ -42,13 +42,14 @@ public class ItsAboutTime extends JavaPlugin
        defaultWorld.setGameRuleValue("doDaylightCycle", "false");
 
         // Setup the timesettask
+        TimeSetTask timesettask = new TimeSetTask(this);
+
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, timesettask, 0L, getConfig().getLong("update-interval") * 20);
     }
 
     @Override
     public void onDisable()
     {
-        // Stop the timesettask
-
         // Set the doDayLightCycle back to normal
         defaultWorld.setGameRuleValue("doDaylightCycle", doDaylightCycleDefault);
     }
