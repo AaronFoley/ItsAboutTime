@@ -1,13 +1,18 @@
 It's About Time
 ===============
 
-A simple plugin to control the length of days, as well as the moon cycle
+This plugin allows you to create a lore time system that actually works in game. This plugin can expand the length of days and nights, to suit your Lore Calendar.
+It also adds an action to the watch to display the current time and date.
 
-This allows you to specify the length of days, and nights as well as setting the length of months and years.
+As this plugin allows you to configure the interval to a custom one, reducing the number time between updates of the time.
+It also allows you to configure a cache so that people are not able to spam the watch to re-calculate the time, instead they are given a cached version until it expires.
+
+The default config that comes with this file was made using the Lore Calendar from [Gazamo's Atherys.com](http://atherys.com)
 
 Compilation
 -----------
 
-Download and install maven
+We use maven to handle our dependencies.
 
-
+* Install [Maven 3](http://maven.apache.org/download.html)
+* Check out this repo and: `mvn clean install`
