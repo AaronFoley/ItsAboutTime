@@ -9,6 +9,9 @@ It also allows you to configure a cache so that people are not able to spam the 
 
 The default config that comes with this file was made using the Lore Calendar from [Gazamo's Atherys.com](http://atherys.com)
 
+
+I also intended to add support for a real moon cycle, but I did not have time to implement this, and could not get the moon to be set correctly each night.
+
 Compilation
 -----------
 
