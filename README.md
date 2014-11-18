@@ -1,2 +1,2 @@
-ItsAboutTime
+com.kaltiz.ItsAboutTime.ItsAboutTime
 ============
