@@ -1,0 +1,99 @@
+# All these values refer to the fake time, not real time
+days-in-week: 10
+month-in-year: 10
+days-in-month: {
+  1: 100
+  2: 100
+  3: 100
+  4: 100
+  5: 100
+  6: 100
+  7: 100
+  8: 100
+  9: 100
+  10: 100
+}
+seconds-in-minute: 60
+minute-in-hour: 60
+# Note Am/PM will be based off this value / 2
+# Also 12 and 24 hour formats will become / 2 of this
+# This value must be dividable by 2 if using AM/PM or 12 hour time
+hour-in-day: 24
+
+# Settings to do with the lunar cycle
+# number of fake seconds for a complete lunar cycle
+# usually this is the time of a month
+lunar-cycle: 3153600
+
+# Timezone used to calculate the time
+timezone: 'UTC'
+
+# The number of real seconds in a year
+year-length: 31556900
+
+# An Amount to add to the year, negative values allowed
+year-modifier: 1655
+
+# How often should we update position of sun and moon in seconds
+update-interval: 600
+
+# prevent re-calculating the clock and cache it for this amount of time
+# This stops lag by people spamming the watch
+# Time is in seconds
+clock-cache: 60
+
+month-names: {
+  1:  "Ascension"
+  2:  "Wind's Renewal"
+  3:  "Forgefire"
+  4:  "Sun's Might"
+  5:  "Sand's Song"
+  6:  "Tide's Flux"
+  7:  "Stormshift"
+  8:  "Urth's Heart"
+  9:  "Frostshroud"
+  10: "Reckoning"
+}
+
+weekday-names: {
+  1:  "Ulvei"
+  2:  "Antwei"
+  3:  "Toldei"
+  4:  "Mirnei"
+  5:  "Kultei"
+  6:  "Yavhei"
+  7:  "Fenyei"
+  8:  "Rosnei"
+  9:  "Ulmhei"
+  10: "Paartesh"
+}
+
+# Whether right clicking a watch should display the time
+use-watch: true
+
+# The format to output the time with
+# %d - Day of month - Leading Zeros
+# %D - Day of month - No leading zeros
+# %l - Weekday name - Tuesday
+# %o - Ordinal for the day, st, nd, rd th
+
+# %F - Month name - February
+# %m - Numeric representation of month, leading zeros
+# %M - Numeric representation of month, no leading zeros
+
+# %y - Year in four digits
+# %Y - Year in two digits
+
+# %a - Lowercase Ante meridiem and Post meridiem am pm
+# %A - Uppercase Ante meridiem and Post meridiem AM PM
+# %g - 12 Hour format without leading zeros
+# %G - 24 hour format without leading zeros
+# %h - 12 Hour format with leading zeros
+# %H - 24 Hour format with leading zeros
+# %i - minutes with leading zeros
+# %I - minutes without leading zeros
+# %s - seconds with leading zeros
+# %S - seconds without leading zeros
+
+# %% - '%' character
+time-format: "The date is %l, %d%o of %F, AU%y and the time is %H:%i"
